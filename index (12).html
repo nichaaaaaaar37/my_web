@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicha Runglerdkriangkrai — Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FAFAF6;--card:#E6E3DE;--card2:#D8D2C8;--ash:#F0EBE4;
+  --border:#D0C9BE;--dark:#252218;--mid:#5C5548;--muted:#8A8478;--rust:#A8896A;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',sans-serif;--nav-h:60px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--dark);overflow-x:hidden;cursor:none}
+.cur{position:fixed;width:9px;height:9px;background:var(--dark);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;mix-blend-mode:multiply}
+.cur-r{position:fixed;width:34px;height:34px;border:1.5px solid var(--rust);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.55}
+body.hov .cur{width:16px;height:16px;background:var(--rust)}
+body.hov .cur-r{width:52px;height:52px;opacity:.2}
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:100;background:rgba(250,250,246,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-logo{width:36px;height:36px;border:1px solid var(--dark);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;letter-spacing:.05em;color:var(--dark);text-decoration:none;flex-shrink:0;cursor:none}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{font-size:13px;font-weight:400;color:var(--mid);text-decoration:none;transition:color .25s;cursor:none;padding:6px 14px;border-radius:2px}
+.nav-links a:hover,.nav-links a.active{color:var(--dark);background:var(--card)}
+.page{display:none;min-height:100vh;padding-top:var(--nav-h)}.page.active{display:block}
+.sec-divider{border:none;border-top:1px solid var(--border);margin:0 56px}
+.sec-label{font-size:20px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);font-weight:500}
+.hero{display:grid;grid-template-columns:58% 42%;min-height:calc(100vh - var(--nav-h));background:var(--bg);align-items:center}
+.hero-left{padding:72px 48px 72px 56px;display:flex;flex-direction:column;justify-content:center}
+.hero-name{font-family:var(--sans);font-size:clamp(44px,6.5vw,92px);font-weight:700;line-height:.92;letter-spacing:-.03em;color:var(--rust);opacity:0;animation:fadeUp .7s .1s forwards}
+.hero-desc{margin-top:28px;font-size:16px;line-height:1.75;color:var(--mid);font-weight:300;max-width:520px;opacity:0;animation:fadeUp .7s .3s forwards}
+.hero-desc+.hero-desc{margin-top:14px}
+.hero-btns{margin-top:36px;display:flex;gap:16px;align-items:center;opacity:0;animation:fadeUp .7s .5s forwards}
+.btn-p{padding:12px 28px;background:var(--dark);color:var(--bg);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .25s;cursor:none;font-weight:400;border:1px solid var(--dark)}
+.btn-p:hover{background:var(--rust);border-color:var(--rust)}
+.btn-o{padding:12px 0;color:var(--mid);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--border);transition:color .25s,border-color .25s;cursor:none}
+.btn-o:hover{color:var(--dark);border-color:var(--dark)}
+.hero-right{background:var(--bg);display:flex;align-items:flex-end;justify-content:center;padding:24px 32px 0;overflow:hidden}
+.hero-right img{width:100%;max-width:540px;object-fit:contain;display:block}
+.what-section{padding:64px 56px}.what-section .sec-label{margin-bottom:32px}
+.what-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);background:var(--border);gap:1px}
+.what-card{padding:44px 32px;background:var(--ash);transition:background .25s;cursor:none}
+.what-card:hover{background:var(--card2)}
+.what-icon{font-size:32px;margin-bottom:24px;width:46px;height:46px;display:flex;align-items:center;justify-content:center}
+.what-title{font-size:20px;font-weight:500;color:var(--dark);margin-bottom:14px;line-height:1.3}
+.what-desc{font-size:17px;line-height:1.65;color:var(--mid);font-weight:300}
+.hl-section{padding:64px 56px}.hl-section .sec-label{margin-bottom:32px}
+.hl-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hl-card{background:#F6F3EF;padding:36px 32px;border:1px solid var(--border);position:relative}
+.hl-card-right{display:flex;flex-direction:column;gap:16px}
+.hl-card.small{padding:28px 28px}
+.hl-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--rust);margin-bottom:16px;font-weight:500}
+.hl-badge-tag{position:absolute;top:20px;right:20px;font-size:9px;letter-spacing:.15em;text-transform:uppercase;border:1px solid var(--border);padding:4px 10px;color:var(--mid);font-weight:500}
+.hl-title{font-size:22px;font-weight:500;color:var(--dark);margin-bottom:12px;line-height:1.2}
+.hl-title.large{font-size:26px}.hl-desc{font-size:13px;color:var(--mid);line-height:1.65;font-weight:300}
+.hl-sub{font-size:12px;color:var(--muted);letter-spacing:.02em;margin-bottom:8px}
+.hl-link{display:inline-block;margin-top:20px;font-size:12px;color:var(--muted);letter-spacing:.05em;text-decoration:none;transition:color .25s;cursor:none}
+.hl-link:hover{color:var(--rust)}
+.gcp-section{padding:64px 56px}.gcp-section .sec-label{margin-bottom:32px}
+.gcp-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.gcp-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;background:#F0EFEC;border:1px solid var(--border);padding:40px 28px}
+.gcp-badge-circle{width:110px;height:110px;border-radius:50%;flex-shrink:0;overflow:hidden}
+.gcp-badge-circle img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+.gcp-info h3{font-size:17px;font-weight:500;color:var(--dark);margin-bottom:4px}
+.gcp-info p{font-size:13px;color:var(--muted)}
+.stack-section{padding:64px 56px 80px}.stack-section .sec-label{margin-bottom:32px}
+.stack-table{width:100%;border-collapse:collapse}
+.stack-table tr{border-top:1px solid var(--border)}.stack-table tr:last-child{border-bottom:1px solid var(--border)}
+.stack-table td{padding:16px 0;vertical-align:top}
+.stack-cat{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);font-weight:500;width:160px;padding-top:20px}
+.stack-tags{display:flex;flex-wrap:wrap;gap:8px}
+.stack-tag{padding:6px 14px;border:1px solid var(--border);font-size:12px;color:var(--mid);background:transparent;transition:all .2s;cursor:none;white-space:nowrap}
+.stack-tag:hover{background:var(--card2);color:var(--dark);border-color:var(--muted)}
+footer{background:var(--card);border-top:1px solid var(--border);padding:48px 56px 32px}
+.footer-top{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-bottom:40px}
+.footer-brand{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--dark);margin-bottom:10px}
+.footer-brand span{color:var(--rust)}.footer-tagline{font-size:13px;color:var(--mid);line-height:1.7;font-weight:300}
+.footer-col h5{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);margin-bottom:16px}
+.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:8px}
+.footer-col ul li a{font-size:13px;color:var(--mid);text-decoration:none;transition:color .2s;cursor:none}
+.footer-col ul li a:hover{color:var(--dark)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:12px;color:var(--muted)}.footer-socials{display:flex;gap:20px}
+.footer-socials a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s;cursor:none}
+.footer-socials a:hover{color:var(--dark)}
+.talks-hero{display:grid;grid-template-columns:1fr 1fr;padding:80px 56px 72px;gap:80px;align-items:flex-end;background:var(--bg)}
+.talks-hero-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.talks-hero-title{font-family:var(--serif);font-size:clamp(64px,9vw,120px);font-weight:700;line-height:.9;letter-spacing:-.03em;color:var(--rust)}
+.talks-hero-right{display:flex;align-items:flex-end;padding-bottom:8px}
+.talks-hero-desc{font-size:16px;line-height:1.75;color:var(--mid);font-weight:300;max-width:440px}
+.talks-section{padding:64px 56px}.talks-cat-label{font-size:20px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);font-weight:500;margin-bottom:32px}
+.talks-card-list{display:flex;flex-direction:column;gap:16px}
+.talks-card{background:var(--ash);border:1px solid var(--border);padding:40px 44px;transition:background .25s;cursor:none}
+.talks-card:hover{background:var(--card)}
+.talks-card-meta-row{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.talks-card-icon{font-size:16px;color:var(--rust)}.talks-card-tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--rust);font-weight:500}
+.talks-card-title{font-size:22px;font-weight:600;color:var(--dark);line-height:1.25;margin-bottom:14px}
+.talks-card-desc{font-size:15px;line-height:1.8;color:var(--mid);font-weight:300;max-width:760px}
+.talks-card-footer{display:flex;align-items:center;gap:24px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}
+.talks-card-event{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.talks-card-btn{display:inline-flex;align-items:center;padding:8px 20px;border:1px solid var(--border);font-size:12px;letter-spacing:.06em;color:var(--dark);text-decoration:none;transition:all .25s;cursor:none}
+.talks-card-btn:hover{background:var(--dark);color:var(--bg);border-color:var(--dark)}
+.talks-community{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding:72px 56px;background:var(--card);align-items:center}
+.talks-community-title{font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:300;line-height:1.2;color:var(--dark)}
+.talks-community-title em{font-style:italic;color:var(--rust)}
+.talks-community-desc{font-size:15px;line-height:1.8;color:var(--mid);font-weight:300}
+.pg-hero{min-height:380px;display:flex;align-items:flex-end;padding:0 56px 72px;background:var(--card)}
+.pg-hero-inner{max-width:700px}
+.pg-hero-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:20px}
+.pg-hero-title{font-family:var(--serif);font-size:clamp(64px,9vw,120px);font-weight:700;line-height:.9;letter-spacing:-.03em;color:var(--dark)}
+.pg-hero-title em{font-style:italic;color:var(--rust)}
+.pg-hero-sub{margin-top:20px;font-size:16px;line-height:1.7;color:var(--mid);font-weight:300}
+.pg-split{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.pg-split-rev .pg-split-visual{order:2}.pg-split-rev .pg-split-content{order:1}
+.pg-split-visual{display:flex;align-items:center;justify-content:center;min-height:380px}
+.pg-visual-placeholder{text-align:center;padding:40px}
+.pg-visual-icon{font-size:72px;color:var(--muted);margin-bottom:20px;line-height:1}
+.pg-visual-label{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--dark);margin-bottom:8px}
+.pg-visual-sublabel{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pg-split-content{padding:64px 56px;display:flex;flex-direction:column;justify-content:center;background:var(--bg)}
+.pg-split-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--rust);font-weight:500;margin-bottom:16px}
+.pg-split-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.1;color:var(--dark);margin-bottom:20px}
+.pg-split-title em{font-style:italic;color:var(--rust)}
+.pg-split-desc{font-size:15px;line-height:1.8;color:var(--mid);font-weight:300;max-width:440px}
+.pg-btn{display:inline-flex;align-items:center;margin-top:28px;padding:12px 28px;background:var(--dark);color:var(--bg);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .25s;cursor:none;align-self:flex-start}
+.pg-btn:hover{background:var(--rust)}
+.pg-cards-section{padding:64px 56px}
+.pg-cards-header{display:flex;border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:40px}
+.pg-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.pg-card{background:var(--bg);padding:40px 32px;transition:background .25s;cursor:none}
+.pg-card:hover{background:var(--ash)}
+.pg-card-type{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rust);margin-bottom:14px;font-weight:500}
+.pg-card-title{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--dark);line-height:1.25;margin-bottom:12px}
+.pg-card-desc{font-size:13px;line-height:1.7;color:var(--mid);font-weight:300}
+.pg-card-meta{margin-top:20px;font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.pg-stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);background:var(--card)}
+.pg-stat{padding:48px 40px;border-right:1px solid var(--border);text-align:center}
+.pg-stat:last-child{border-right:none}
+.pg-stat-num{font-family:var(--serif);font-size:48px;font-weight:300;color:var(--rust);line-height:1;margin-bottom:8px}
+.pg-stat-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-weight:400}
+.pg-contact-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);text-decoration:none;transition:all .2s;cursor:none}
+.pg-contact-row:hover .pg-contact-val{color:var(--rust)}
+.pg-contact-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);min-width:80px}
+.pg-contact-val{font-size:15px;color:var(--dark);transition:color .2s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+/* ── EXPERIENCE TIMELINE ───────────────────── */
+.exp-current{display:grid;grid-template-columns:1fr 1fr;background:var(--dark);min-height:340px}
+.exp-current-content{padding:72px 56px;display:flex;flex-direction:column;justify-content:center}
+.exp-current-eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--rust);margin-bottom:14px}
+.exp-current-title{font-family:var(--serif);font-size:clamp(36px,4.5vw,58px);font-weight:300;color:#F7F4EF;line-height:1.05;margin-bottom:20px}
+.exp-current-title em{font-style:italic;color:var(--rust)}
+.exp-current-desc{font-size:14px;line-height:1.8;color:#A09888;font-weight:300;max-width:400px}
+.exp-current-right{padding:72px 56px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid rgba(255,255,255,.08)}
+.exp-badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.exp-badge{padding:5px 14px;border:1px solid rgba(255,255,255,.15);font-size:11px;color:#8A8478;letter-spacing:.06em}
+.exp-kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);margin-top:32px}
+.exp-kpi{padding:20px 24px;background:var(--dark)}
+.exp-kpi-num{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--rust);line-height:1;margin-bottom:4px}
+.exp-kpi-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7A7368}
+/* Timeline */
+.exp-timeline-section{padding:72px 56px}
+.exp-tl-header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:0}
+.exp-tl-title{font-size:20px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);font-weight:500}
+.exp-tl-count{font-size:12px;color:var(--muted);letter-spacing:.08em}
+.exp-tl-list{position:relative;padding-left:0}
+.exp-tl-entry{display:grid;grid-template-columns:140px 1fr;border-bottom:1px solid var(--border)}
+.exp-tl-entry:last-child{border-bottom:none}
+.exp-tl-left{padding:36px 24px 36px 0;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.exp-tl-year{font-size:11px;letter-spacing:.1em;color:var(--rust);font-weight:500;text-transform:uppercase}
+.exp-tl-period{font-size:11px;color:var(--muted);line-height:1.5}
+.exp-tl-dot{width:8px;height:8px;border-radius:50%;background:var(--rust);margin-top:auto;margin-left:auto;position:relative;right:-5px}
+.exp-tl-right{padding:36px 0 36px 36px;display:flex;flex-direction:column;justify-content:center}
+.exp-tl-role{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.exp-tl-company{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--dark);margin-bottom:12px;line-height:1.1}
+.exp-tl-desc{font-size:13px;line-height:1.75;color:var(--mid);font-weight:300;max-width:600px}
+.exp-tl-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.exp-tl-tag{font-size:10px;letter-spacing:.1em;padding:3px 10px;border:1px solid var(--border);color:var(--muted);text-transform:uppercase}
+/* ── FOSSASIA PHOTO GRID ─────────────────── */
+.fossasia-feature{background:var(--dark);padding:64px 56px}
+.fossasia-feature-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+.fossasia-feature-eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--rust);margin-bottom:10px}
+.fossasia-feature-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;color:#F7F4EF;line-height:1.05}
+.fossasia-feature-title em{font-style:italic;color:var(--rust)}
+.fossasia-feature-meta{font-size:13px;color:#7A7368;line-height:1.7;max-width:320px;text-align:right}
+.fossasia-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:4px}
+.fossasia-photo{overflow:hidden;position:relative;background:var(--mid)}
+.fossasia-photo:nth-child(1){grid-column:1/3;aspect-ratio:16/9}
+.fossasia-photo:nth-child(2){grid-column:3/4;aspect-ratio:4/5}
+.fossasia-photo:nth-child(3){grid-column:1/2;aspect-ratio:4/3}
+.fossasia-photo:nth-child(4){grid-column:2/3;aspect-ratio:4/3}
+.fossasia-photo:nth-child(5){grid-column:1/2;aspect-ratio:4/3}
+.fossasia-photo:nth-child(6){grid-column:2/4;aspect-ratio:16/7}
+.fossasia-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;filter:none}
+.fossasia-photo:hover img{transform:scale(1.04)}
+.fossasia-photo-placeholder{width:100%;height:100%;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#2E2B22,#3A3628)}
+.fossasia-photo-placeholder-icon{font-size:24px;color:#4A4640;line-height:1}
+.fossasia-photo-placeholder-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#4A4640}
+.fossasia-detail-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(255,255,255,.07);margin-top:32px}
+.fossasia-detail{padding:24px 0;border-right:1px solid rgba(255,255,255,.07);padding-right:32px;margin-right:32px}
+.fossasia-detail:last-child{border-right:none;margin-right:0;padding-right:0}
+.fossasia-detail-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rust);margin-bottom:6px}
+.fossasia-detail-value{font-size:14px;color:#A09888;line-height:1.6}
+/* ── HOME HL-CARD badge images ───────────── */
+.hl-cert-img{width:64px;height:64px;object-fit:contain;margin-bottom:12px;display:block}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="cur-r"></div>
+<nav>
+  <a class="nav-logo" href="#" data-page="home">NR</a>
+  <ul class="nav-links">
+    <li><a href="#" id="nav-home" class="active" data-page="home">Home</a></li>
+    <li><a href="#" id="nav-talks" data-page="talks">Talks</a></li>
+    <li><a href="#" id="nav-experience" data-page="experience">Experience</a></li>
+    <li><a href="#" id="nav-publish" data-page="publish">Projects</a></li>
+    <li><a href="#" id="nav-contact" data-page="contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-name">Nicha<br>Runglerdkriangkrai</h1>
+      <p class="hero-desc">Data Engineer — building ETL/ELT pipelines, CI/CD automation, and analytics-ready datasets across Azure and GCP.</p>
+      <p class="hero-desc">Driven by a deep passion for cloud technologies and data engineering &#8212; always learning, embracing new challenges, and building scalable solutions that matter.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-p" data-page="experience">View Experience</a>
+        <a href="#" class="btn-o" data-page="contact">Get in Touch &#8594;</a>
+      </div>
+    </div>
+    <div class="hero-right">      <img src="assets/illustration.png" alt="Nicha illustration"/>
+    </div>
+  </section>
+  <hr class="sec-divider">
+  <section class="what-section">
+    <p class="sec-label">What I Do</p>
+    <div class="what-grid">
+      <div class="what-card"><div class="what-icon">&#8862;</div><div class="what-title">Data Engineering</div><div class="what-desc">Building ETL/ELT pipelines across Azure &amp; GCP &#8212; from ingestion to analytics-ready datasets.</div></div>
+      <div class="what-card"><div class="what-icon">&#8734;</div><div class="what-title">CI/CD &amp; DataOps</div><div class="what-desc">Automated Synapse notebook deployments &#8212; 60 notebooks in under 3 min via Azure DevOps &amp; REST API.</div></div>
+      <div class="what-card"><div class="what-icon">&#9672;</div><div class="what-title">Data Architecture</div><div class="what-desc">GCP Dataform framework + Medallion lakehouse design &#8212; scalable, traceable, production-ready.</div></div>
+      <div class="what-card"><div class="what-icon" style="font-size:30px">&#9678;</div><div class="what-title">Talks</div><div class="what-desc">Speaker at FOSSASIA 2026 &#8212; "Apache Airflow 101 with Cloud Composer" &#183; Community Day &#183; Bangkok.</div></div>
+    </div>
+  </section>
+  <hr class="sec-divider">
+  <section class="hl-section">
+    <p class="sec-label">Highlights</p>
+    <div class="hl-grid">
+      <div class="hl-card">
+        <div class="hl-badge">&#9678; Tech Speaker</div>
+        <h3 class="hl-title large">FOSSASIA Summit 2026</h3>
+        <p class="hl-desc">Presented "Apache Airflow 101 with Cloud Composer" at an international open-source conference &#8212; Community Day &#183; Bangkok &#183; March 2026</p>
+        <a href="https://eventyay.com/e/88882f3e/session/10556" target="_blank" class="talks-card-btn" style="margin-top:20px">Session &#8599;</a>
+      </div>
+      <div class="hl-card-right">
+        <div class="hl-card small">
+          <span class="hl-badge-tag">Certified</span>
+          <img src="assets/badge-architect.png" alt="Cloud Architect" class="hl-cert-img"/>
+          <h3 class="hl-title">Professional Cloud Architect</h3>
+          <p class="hl-sub">Jun 2025&#8211;2027</p>
+          <p class="hl-desc">Google Cloud Certified</p>
+          <a href="https://www.credly.com/earner/earned/badge/4b6e70df-8b55-4885-90c9-4c86a268d178" target="_blank" class="talks-card-btn" style="margin-top:16px">View Badge &#8599;</a>
+        </div>
+        <div class="hl-card small">
+          <span class="hl-badge-tag">Certified</span>
+          <img src="assets/badge-engineer.png" alt="Data Engineer" class="hl-cert-img"/>
+          <h3 class="hl-title">Professional Data Engineer</h3>
+          <p class="hl-sub">Dec 2024&#8211;2026</p>
+          <p class="hl-desc">Google Cloud Certified</p>
+          <a href="https://www.credly.com/earner/earned/badge/a53c0895-54d5-43bd-9e6a-99de88137e1e" target="_blank" class="talks-card-btn" style="margin-top:16px">View Badge &#8599;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="sec-divider">
+  <section class="gcp-section">
+    <p class="sec-label">Google Cloud Certified</p>
+    <div class="gcp-list">
+      <div class="gcp-item">
+        <div class="gcp-badge-circle">          <img src="assets/badge-architect.png" alt="Cloud Architect Badge"/>
+        </div>
+        <div class="gcp-info"><h3>Professional Cloud Architect</h3><p>Google Cloud &#183; Jun 2025 &#8211; Jun 2027</p></div>
+      </div>
+      <div class="gcp-item">
+        <div class="gcp-badge-circle">          <img src="assets/badge-engineer.png" alt="Data Engineer Badge"/>
+        </div>
+        <div class="gcp-info"><h3>Professional Data Engineer</h3><p>Google Cloud &#183; Dec 2024 &#8211; Dec 2026</p></div>
+      </div>
+    </div>
+  </section>
+  <hr class="sec-divider">
+  <section class="stack-section">
+    <p class="sec-label">Stack</p>
+    <table class="stack-table">
+      <tr><td class="stack-cat">Cloud</td><td><div class="stack-tags"><span class="stack-tag">Microsoft Azure</span><span class="stack-tag">Azure Synapse Analytics</span><span class="stack-tag">Azure Data Factory</span><span class="stack-tag">Azure Functions</span><span class="stack-tag">Azure DevOps</span><span class="stack-tag">Microsoft Fabric</span><span class="stack-tag">Google Cloud Platform</span><span class="stack-tag">BigQuery</span><span class="stack-tag">GCP Cloud Composer</span><span class="stack-tag">GCP Dataform</span><span class="stack-tag">Google Cloud Storage</span></div></td></tr>
+      <tr><td class="stack-cat">Languages</td><td><div class="stack-tags"><span class="stack-tag">Python</span><span class="stack-tag">SQL</span><span class="stack-tag">Bash</span><span class="stack-tag">C++</span><span class="stack-tag">Apache Spark</span></div></td></tr>
+      <tr><td class="stack-cat">DataOps &amp; CI/CD</td><td><div class="stack-tags"><span class="stack-tag">Apache Airflow</span><span class="stack-tag">CI/CD Pipeline Automation</span><span class="stack-tag">YAML Pipelines</span><span class="stack-tag">REST API Integration</span><span class="stack-tag">Git / GitHub / GitLab</span><span class="stack-tag">Service Hooks</span><span class="stack-tag">Deployment Automation</span></div></td></tr>
+      <tr><td class="stack-cat">Databases</td><td><div class="stack-tags"><span class="stack-tag">SQL Server (SSMS)</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">MySQL</span><span class="stack-tag">SQLite</span><span class="stack-tag">DBeaver</span></div></td></tr>
+      <tr><td class="stack-cat">BI &amp; Viz</td><td><div class="stack-tags"><span class="stack-tag">Power BI</span><span class="stack-tag">Looker Studio</span><span class="stack-tag">Microsoft Fabric Dataflow</span><span class="stack-tag">Microsoft Fabric Warehouse</span></div></td></tr>
+    </table>
+  </section>
+  <footer>
+    <div class="footer-top">
+
+      <div class="footer-col"><h5>Pages</h5><ul>
+        <li><a href="#" data-page="home">Home</a></li>
+        <li><a href="#" data-page="talks">Talks</a></li>
+        <li><a href="#" data-page="experience">Experience</a></li>
+        <li><a href="#" data-page="publish">Projects</a></li>
+        <li><a href="#" data-page="contact">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Credentials</h5><ul>
+        <li><a href="https://fossasia.org" target="_blank">FOSSASIA</a></li>
+        <li><a href="https://credly.com/users/nicha-runglerdkriangkrai/badges" target="_blank">Credly</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Connect</h5><ul>
+        <li><a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#d9b7b0bab1b8abacb7eaee99beb4b8b0b5f7bab6b4">Email</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nicha Runglerdkriangkrai</span>
+      <div class="footer-socials">
+        <a href="https://github.com/nichaaaaaaar37" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a>
+        <a href="/cdn-cgi/l/email-protection#315f5852595043445f020671565c50585d1f525e5c">Email</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- TALKS -->
+<div class="page" id="page-talks">
+  <div class="talks-hero">
+    <div><p class="talks-hero-eyebrow">Speaking &amp; Community</p><h1 class="talks-hero-title">Talks</h1></div>
+    <div class="talks-hero-right"></div>
+  </div>
+  <hr class="sec-divider" style="margin:0 56px">
+
+  <!-- Conference Talk -->
+  <section class="talks-section">
+    <p class="talks-cat-label">Conference</p>
+    <div class="talks-card-list">
+      <div class="talks-card">
+        <div class="talks-card-meta-row"><span class="talks-card-icon">&#9678;</span><span class="talks-card-tag">International &#183; English &#183; March 2026</span></div>
+        <p style="font-size:26px;letter-spacing:.04em;text-transform:uppercase;color:var(--dark);margin-bottom:6px;font-weight:700;line-height:1">FOSSASIA Summit 2026</p>
+        <h2 class="talks-card-title">Apache Airflow 101 (with Cloud Composer)</h2>
+        <p class="talks-card-desc">A beginner-friendly introduction to Apache Airflow and GCP Cloud Composer &#8212; presented in English at an international open-source conference. Covered why Airflow exists, core components (DAG, Scheduler, Executor, Worker, Metadata DB), how Airflow works end-to-end, and a live ETL pipeline example on Cloud Composer using GCS and BigQuery.</p>
+        <div class="talks-card-footer">
+          <span class="talks-card-event">FOSSASIA Summit 2026 &#183; Community Day &#183; Bangkok, Thailand</span>
+          <a href="https://eventyay.com/e/4bd0109e/session/10688" target="_blank" class="talks-card-btn">Session &#8599;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOSSASIA Photo Feature -->
+  <section class="fossasia-feature">
+    <div class="fossasia-feature-header">
+      <div>
+        <p class="fossasia-feature-eyebrow">Featured Talk &#183; March 2026</p>
+        <h2 class="fossasia-feature-title">FOSSASIA<br><em>Summit 2026</em></h2>
+      </div>
+      <p class="fossasia-feature-meta">Apache Airflow 101 (with Cloud Composer) &#183; Community Day &#183; Bangkok, Thailand</p>
+    </div>
+    <div class="fossasia-grid">
+      <div class="fossasia-photo">
+        <img src="https://raw.githubusercontent.com/nichaaaaaaar37/my_web/main/assets/fossasia/photo2.jpg" alt="FOSSASIA Summit 2026"/>
+      </div>
+      <div class="fossasia-photo">
+        <img src="https://raw.githubusercontent.com/nichaaaaaaar37/my_web/main/assets/fossasia/IMG_7188.jpg" alt="FOSSASIA Summit 2026"/>
+      </div>
+      <div class="fossasia-photo">
+        <img src="https://raw.githubusercontent.com/nichaaaaaaar37/my_web/main/assets/fossasia/photo3.jpg" alt="FOSSASIA Summit 2026"/>
+      </div>
+      <div class="fossasia-photo">
+        <img src="https://raw.githubusercontent.com/nichaaaaaaar37/my_web/main/assets/fossasia/IMG_7170.jpg" alt="FOSSASIA Summit 2026"/>
+      </div>
+      <div class="fossasia-photo">
+        <img src="https://raw.githubusercontent.com/nichaaaaaaar37/my_web/main/assets/fossasia/IMG_7173.jpg" alt="FOSSASIA Summit 2026"/>
+      </div>
+      <div class="fossasia-photo">
+        <img src="https://raw.githubusercontent.com/nichaaaaaaar37/my_web/main/assets/fossasia/photo1.jpg" alt="FOSSASIA Summit 2026"/>
+      </div>
+    </div>
+    <div class="fossasia-detail-row">
+      <div class="fossasia-detail"><p class="fossasia-detail-label">Event</p><p class="fossasia-detail-value">FOSSASIA Summit 2026 &#183; Community Day</p></div>
+      <div class="fossasia-detail"><p class="fossasia-detail-label">Topic</p><p class="fossasia-detail-value">Apache Airflow 101 (with Cloud Composer)</p></div>
+      <div class="fossasia-detail"><p class="fossasia-detail-label">Location &amp; Date</p><p class="fossasia-detail-value">Bangkok, Thailand &#183; March 2026</p></div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-top">
+
+      <div class="footer-col"><h5>Pages</h5><ul>
+        <li><a href="#" data-page="home">Home</a></li>
+        <li><a href="#" data-page="talks">Talks</a></li>
+        <li><a href="#" data-page="experience">Experience</a></li>
+        <li><a href="#" data-page="publish">Projects</a></li>
+        <li><a href="#" data-page="contact">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Credentials</h5><ul>
+        <li><a href="https://fossasia.org" target="_blank">FOSSASIA</a></li>
+        <li><a href="https://credly.com/users/nicha-runglerdkriangkrai/badges" target="_blank">Credly</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Connect</h5><ul>
+        <li><a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#117f7872797063647f222651767c70787d3f727e7c">Email</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nicha Runglerdkriangkrai</span>
+      <div class="footer-socials">
+        <a href="https://github.com/nichaaaaaaar37" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a>
+        <a href="/cdn-cgi/l/email-protection#80eee9e3e8e1f2f5eeb3b7c0e7ede1e9ecaee3efed">Email</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="page" id="page-experience">
+  <!-- Hero -->
+  <div class="pg-hero" style="background:var(--card2)"><div class="pg-hero-inner"><p class="pg-hero-eyebrow">Work &amp; Career</p><h1 class="pg-hero-title">Experience &amp; <em>Timeline</em></h1></div></div>
+
+  <!-- Current Role: Betagro — dark editorial block -->
+  <div class="exp-current">
+    <div class="exp-current-content">
+      <p class="exp-current-eyebrow">Current Role &#183; Mar 2025 &#8211; Present</p>
+      <h2 class="exp-current-title">Betagro<br><em>Group</em></h2>
+      <p class="exp-current-desc">Data Engineer on D&amp;A MIS team &#8212; built CI/CD pipelines, ETL workflows with ADF, GCP Dataform framework, and Power BI dashboards.</p>
+      <div class="exp-badge-row">
+        <span class="exp-badge">Azure Synapse</span>
+        <span class="exp-badge">Google Cloud Platform</span>
+        <span class="exp-badge">Azure DevOps</span>
+        <span class="exp-badge">Azure Data Factory</span>
+        <span class="exp-badge">Microsoft Fabric</span>
+      </div>
+    </div>
+    <div class="exp-current-right">
+      <div style="padding:40px 44px;display:flex;flex-direction:column;gap:6px">
+        <p style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--rust);opacity:.6;margin-bottom:8px">Education</p>
+        <p style="font-family:var(--serif);font-size:clamp(48px,5vw,72px);font-weight:300;color:#F7F4EF;line-height:.95">B.Eng<em style="font-style:italic;color:var(--rust)">.</em></p>
+        <p style="font-family:var(--serif);font-size:clamp(22px,2.5vw,32px);font-weight:300;color:#C4B9A8;line-height:1.2;font-style:italic">Kasetsart University</p>
+        <p style="font-size:12px;letter-spacing:.08em;color:#F7F4EF;opacity:.45;margin-top:10px;line-height:1.7">Electrical Engineering<br>Telecommunication · 2020–2024</p>
+      </div>
+      </div>
+    </div>
+
+  <!-- Career Timeline -->
+  <section class="exp-timeline-section">
+    <div class="exp-tl-header">
+      <p class="exp-tl-title">Career Timeline</p>
+      <span class="exp-tl-count">5 positions &#183; 2023&#8211;present</span>
+    </div>
+    <div class="exp-tl-list">
+
+      <div class="exp-tl-entry">
+        <div class="exp-tl-left">
+          <span class="exp-tl-year">2025</span>
+          <span class="exp-tl-period">Mar 2025&#8211;<br>Present</span>
+          <div class="exp-tl-dot"></div>
+        </div>
+        <div class="exp-tl-right">
+          <p class="exp-tl-role">Data Engineer &#183; Full-time</p>
+          <p class="exp-tl-company">Betagro Group</p>
+          <p class="exp-tl-desc">Designed CI/CD pipelines and ETL workflows on Azure (Synapse, Data Factory, DevOps). Built GCP solutions using Dataform and Airflow (Cloud Composer), including documentation and knowledge sharing. Performed data migration and ensured data quality for production-ready datasets.</p>
+          <div class="exp-tl-tags"><span class="exp-tl-tag">Azure</span><span class="exp-tl-tag">Google Cloud Platform</span><span class="exp-tl-tag">Dataform</span><span class="exp-tl-tag">Azure Data Factory</span><span class="exp-tl-tag">Fabric</span><span class="exp-tl-tag">SAP HANA</span></div>
+        </div>
+      </div>
+
+      <div class="exp-tl-entry">
+        <div class="exp-tl-left">
+          <span class="exp-tl-year">2024</span>
+          <span class="exp-tl-period">Nov 2024&#8211;<br>Feb 2025</span>
+          <div class="exp-tl-dot" style="background:var(--muted)"></div>
+        </div>
+        <div class="exp-tl-right">
+          <p class="exp-tl-role">Data Engineer &#183; Full-time</p>
+          <p class="exp-tl-company">LoxleyOrbit PCL</p>
+          <p class="exp-tl-desc">Built Looker Studio dashboards for Port Authority of Thailand (PSP), with BigQuery billing queries and ERP invoice datasets.</p>
+          <div class="exp-tl-tags"><span class="exp-tl-tag">BigQuery</span><span class="exp-tl-tag">Looker Studio</span><span class="exp-tl-tag">Google Cloud Platform</span><span class="exp-tl-tag">SQL</span></div>
+        </div>
+      </div>
+
+      <div class="exp-tl-entry">
+        <div class="exp-tl-left">
+          <span class="exp-tl-year">2024</span>
+          <span class="exp-tl-period">Sep&#8211;Oct 2024</span>
+          <div class="exp-tl-dot" style="background:var(--muted)"></div>
+        </div>
+        <div class="exp-tl-right">
+          <p class="exp-tl-role">Data Engineer Intern</p>
+          <p class="exp-tl-company">iCube Co., Ltd.</p>
+          <p class="exp-tl-desc">Managed structured databases using SSMS and DBeaver for PIMS, with data preparation for BI dashboards and platform testing.</p>
+          <div class="exp-tl-tags"><span class="exp-tl-tag">SSMS</span><span class="exp-tl-tag">DBeaver</span><span class="exp-tl-tag">SQL</span></div>
+        </div>
+      </div>
+
+      <div class="exp-tl-entry">
+        <div class="exp-tl-left">
+          <span class="exp-tl-year">2024</span>
+          <span class="exp-tl-period">Aug&#8211;Sep 2024</span>
+          <div class="exp-tl-dot" style="background:var(--muted)"></div>
+        </div>
+        <div class="exp-tl-right">
+          <p class="exp-tl-role">Data Analyst Intern</p>
+          <p class="exp-tl-company">Prinsiri PCL</p>
+          <p class="exp-tl-desc">Queried and analyzed real estate datasets in BigQuery using SQL, with data preparation and validation for reporting. Built Looker Studio dashboards to support analysis and communicated insights to stakeholders.</p>
+          <div class="exp-tl-tags"><span class="exp-tl-tag">BigQuery</span><span class="exp-tl-tag">Looker Studio</span><span class="exp-tl-tag">Google Cloud Platform</span></div>
+        </div>
+      </div>
+
+      <div class="exp-tl-entry">
+        <div class="exp-tl-left">
+          <span class="exp-tl-year">2023</span>
+          <span class="exp-tl-period">Apr&#8211;Jun 2023</span>
+          <div class="exp-tl-dot" style="background:var(--muted)"></div>
+        </div>
+        <div class="exp-tl-right">
+          <p class="exp-tl-role">Digital Platform Infrastructure Intern</p>
+          <p class="exp-tl-company">Thaicom PCL</p>
+          <p class="exp-tl-desc">Processed satellite images using QGIS and Python, generating TIFF outputs for AI and GIS. Tested SPOT GEN 4 GPS tracker and documented results for safety and rescue use cases.</p>
+          <div class="exp-tl-tags"><span class="exp-tl-tag">Python</span><span class="exp-tl-tag">QGIS</span><span class="exp-tl-tag">GeoTIFF</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Key Project -->
+  <div class="pg-split pg-split-rev" style="background:var(--card)">
+    <div class="pg-split-content"><p class="pg-split-eyebrow">Featured Work &#183; Azure</p><h2 class="pg-split-title">CI/CD for<br><em>Synapse Notebooks</em></h2><p class="pg-split-desc">Automated CI/CD pipeline: Dev commit &#8594; PR merge to main &#8594; Service Hook (git.push) &#8594; Azure Function &#8594; YAML Pipeline &#8594; Synapse LIVE. Deploys notebooks via REST API with jq stripping DEV-specific metadata before deploy &#8212; multiple successful runs, zero failures.</p></div>
+    <div class="pg-split-visual" style="background:var(--ash)"><div class="pg-visual-placeholder"><div class="pg-visual-icon">&#8734;</div><p class="pg-visual-label">Azure DevOps &#8594; Synapse</p></div></div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+
+      <div class="footer-col"><h5>Pages</h5><ul>
+        <li><a href="#" data-page="home">Home</a></li>
+        <li><a href="#" data-page="talks">Talks</a></li>
+        <li><a href="#" data-page="experience">Experience</a></li>
+        <li><a href="#" data-page="publish">Projects</a></li>
+        <li><a href="#" data-page="contact">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Credentials</h5><ul>
+        <li><a href="https://fossasia.org" target="_blank">FOSSASIA</a></li>
+        <li><a href="https://credly.com/users/nicha-runglerdkriangkrai/badges" target="_blank">Credly</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Connect</h5><ul>
+        <li><a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#aac4c3c9c2cbd8dfc4999deacdc7cbc3c684c9c5c7">Email</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nicha Runglerdkriangkrai</span>
+      <div class="footer-socials">
+        <a href="https://github.com/nichaaaaaaar37" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a>
+        <a href="/cdn-cgi/l/email-protection#93fdfaf0fbf2e1e6fda0a4d3f4fef2faffbdf0fcfe">Email</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- PROJECTS -->
+<div class="page" id="page-publish">
+  <div class="pg-hero" style="background:var(--ash)"><div class="pg-hero-inner"><p class="pg-hero-eyebrow">Open Source &amp; Writing</p><h1 class="pg-hero-title">Projects &amp; <em>Articles</em></h1></div></div>
+  <div class="pg-split">
+    <div class="pg-split-visual" style="background:#2A2520"><div class="pg-visual-placeholder"><div class="pg-visual-icon" style="color:var(--rust)">&#9672;</div><p class="pg-visual-label" style="color:#F7F4EF">Automated ETL Pipeline</p><p class="pg-visual-sublabel" style="color:#6A6258">GCP &#183; Airflow &#183; BigQuery</p></div></div>
+    <div class="pg-split-content">
+      <p class="pg-split-eyebrow">Featured Project &#183; GCP</p>
+      <h2 class="pg-split-title">Automated Online<br><em>Retail ETL Pipeline</em></h2>
+      <p class="pg-split-desc">End-to-end GCP data pipeline processing raw e-commerce transactions into analytics-ready BigQuery datasets. Built with Python, Pandas, Apache Airflow on Cloud Composer, and GCS &#8212; with automated data cleaning, transformation, and loading for sales analytics.</p>
+      <a href="https://github.com/nichaaaaaaar37/Automated-Online-Retail-ETL-Pipeline-End-to-End-Project" target="_blank" class="talks-card-btn" style="margin-top:24px;align-self:flex-start">GitHub &#8599;</a>
+    </div>
+  </div>
+  <!-- Projects -->
+  <div class="pg-cards-section">
+    <div class="pg-cards-header"><p class="sec-label">Projects</p></div>
+    <div class="pg-cards-grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="pg-card">
+        <p class="pg-card-type">Project &#183; GCP</p>
+        <h3 class="pg-card-title">Automated Online Retail ETL Pipeline</h3>
+        <p class="pg-card-desc">9-step ETL pipeline on GCP: Kaggle CSV &#8594; GCS &#8594; Cloud Composer (Airflow) &#8594; BigQuery. Handles deduplication, missing values, feature engineering, outlier detection, type casting, and string normalization. Analytics queries include RFM segmentation, top products per country, and monthly sales trends.</p>
+        <p class="pg-card-meta" style="margin-top:16px"><a href="https://github.com/nichaaaaaaar37/Automated-Online-Retail-ETL-Pipeline-End-to-End-Project" target="_blank" class="talks-card-btn">GitHub &#8599;</a></p>
+      </div>
+      <div class="pg-card">
+        <p class="pg-card-type">Project &#183; GCP</p>
+        <h3 class="pg-card-title">ETL Pipeline for Bank Marketing Campaign</h3>
+        <p class="pg-card-desc">End-to-end GCP pipeline that cleans and restructures bank marketing campaign data using Python and Pandas, loading the results into BigQuery for analytics.</p>
+        <p class="pg-card-meta" style="margin-top:16px"><a href="https://github.com/nichaaaaaaar37/ETL-Pipeline-for-Bank-Marketing-Campaign-Data-End-to-End-Project" target="_blank" class="talks-card-btn">GitHub &#8599;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Articles -->
+  <div class="pg-cards-section" style="padding-top:0">
+    <div class="pg-cards-header"><p class="sec-label">Articles</p></div>
+    <div class="pg-cards-grid" style="grid-template-columns:repeat(1,1fr)">
+      <div class="pg-card"><p class="pg-card-type">Article &#183; Medium (Thai)</p><h3 class="pg-card-title">Dataform on GCP &#8212; Thai Community Guide</h3><p class="pg-card-desc">An introduction to Dataform for Data teams using BigQuery &#8212; covering why scattered SQL becomes a problem at scale, and how Dataform solves it through SQLX files, dependency management, compiled graph, and Git integration.</p><p class="pg-card-meta" style="margin-top:16px"><a href="https://medium.com/@nicharun37/dataform-คืออะไร-tool-ที่อยากแนะนำ-data-team-ที่ใช้-bigquery-ให้รู้จัก-a44d99b3efde" target="_blank" class="talks-card-btn">Read &#8599;</a></p></div>
+    </div>
+  </div>
+  <div class="pg-split pg-split-rev" style="background:var(--card)">
+    <div class="pg-split-content"><p class="pg-split-eyebrow">Article &#183; Medium</p><h2 class="pg-split-title">Dataform on GCP<br><em>Thai Edition</em></h2><p class="pg-split-desc">An introduction to Dataform for Data teams using BigQuery &#8212; covering why scattered SQL becomes a problem at scale, and how Dataform solves it through SQLX files, dependency management, compiled graph, and Git integration.</p><a href="https://medium.com/@nicharun37/dataform-คืออะไร-tool-ที่อยากแนะนำ-data-team-ที่ใช้-bigquery-ให้รู้จัก-a44d99b3efde" target="_blank" class="pg-btn">Read on Medium &#8599;</a></div>
+    <div class="pg-split-visual" style="background:var(--ash)"><div class="pg-visual-placeholder"><div class="pg-visual-icon">&#8862;</div><p class="pg-visual-label">Dataform on GCP</p><p class="pg-visual-sublabel">Medium &#183; Thai &#183; 2025</p></div></div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+
+      <div class="footer-col"><h5>Pages</h5><ul>
+        <li><a href="#" data-page="home">Home</a></li>
+        <li><a href="#" data-page="talks">Talks</a></li>
+        <li><a href="#" data-page="experience">Experience</a></li>
+        <li><a href="#" data-page="publish">Projects</a></li>
+        <li><a href="#" data-page="contact">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Credentials</h5><ul>
+        <li><a href="https://fossasia.org" target="_blank">FOSSASIA</a></li>
+        <li><a href="https://credly.com/users/nicha-runglerdkriangkrai/badges" target="_blank">Credly</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Connect</h5><ul>
+        <li><a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#fe90979d969f8c8b90cdc9be99939f9792d09d9193">Email</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nicha Runglerdkriangkrai</span>
+      <div class="footer-socials">
+        <a href="https://github.com/nichaaaaaaar37" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a>
+        <a href="/cdn-cgi/l/email-protection#751b1c161d1407001b4642351218141c195b161a18">Email</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div class="pg-hero" style="background:var(--card)"><div class="pg-hero-inner"><p class="pg-hero-eyebrow">Say Hello</p><h1 class="pg-hero-title">Get in<br><em>Touch</em></h1><p class="pg-hero-sub"></p></div></div>
+  <div class="pg-split">
+    <div class="pg-split-visual" style="background:var(--ash)"><div class="pg-visual-placeholder"><div class="pg-visual-icon">&#9678;</div><p class="pg-visual-label">Based in Bangkok</p><p class="pg-visual-sublabel">Thailand</p></div></div>
+    <div class="pg-split-content">
+      <p class="pg-split-eyebrow">Direct Contact</p>
+      <h2 class="pg-split-title">Let&#8217;s work<br><em>together</em></h2>
+      <p class="pg-split-desc">Feel free to reach out &#8212; always happy to connect.</p>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:0">
+        <a href="/cdn-cgi/l/email-protection#5b353238333a292e35686c1b3c363a323775383436" class="pg-contact-row"><span class="pg-contact-label">Email</span><span class="pg-contact-val"><span class="__cf_email__" data-cfemail="8ce2e5efe4edfef9e2bfbbccebe1ede5e0a2efe3e1">[email&#160;protected]</span></span></a>
+        <a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank" class="pg-contact-row"><span class="pg-contact-label">LinkedIn</span><span class="pg-contact-val">Nicha Runglerdkriangkrai</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="pg-cards-section">
+    <div class="pg-cards-header"><p class="sec-label">Find Me Online</p></div>
+    <div class="pg-cards-grid">
+      <div class="pg-card"><p class="pg-card-type">Professional Network</p><h3 class="pg-card-title">LinkedIn</h3><p class="pg-card-desc">Work history, certifications, endorsements, and professional updates.</p><p class="pg-card-meta" style="margin-top:16px"><a href="https://www.linkedin.com/in/nicha-runglerdkriangkrai/" target="_blank" class="talks-card-btn">Connect &#8599;</a></p></div>
+      <div class="pg-card"><p class="pg-card-type">Code &amp; Projects</p><h3 class="pg-card-title">GitHub</h3><p class="pg-card-desc">Open source ETL pipelines, data engineering projects, and portfolio code.</p><p class="pg-card-meta" style="margin-top:16px"><a href="https://github.com/nichaaaaaaar37" target="_blank" class="talks-card-btn">GitHub &#8599;</a></p></div>
+      <div class="pg-card"><p class="pg-card-type">Certifications</p><h3 class="pg-card-title">Credly</h3><p class="pg-card-desc">Google Cloud Professional certifications &#8212; Cloud Architect and Data Engineer badges.</p><p class="pg-card-meta" style="margin-top:16px"><a href="https://www.credly.com/users/nicha-runglerdkriangkrai" target="_blank" class="talks-card-btn">Credly &#8599;</a></p></div>
+    </div>
+  </div>
+  <div class="pg-split pg-split-rev" style="background:var(--card)">
+    <div class="pg-split-content"><p class="pg-split-eyebrow">Location</p><h2 class="pg-split-title">Bangkok,<br><em>Thailand</em></h2><p class="pg-split-desc">Based in Bangkok, available for remote roles globally and on-site positions in Bangkok.</p><a href="/cdn-cgi/l/email-protection#7a141319121b080f14494d3a1d171b131654191517" class="pg-btn">Send Email &#8599;</a></div>
+    <div class="pg-split-visual" style="background:var(--ash)"><div class="pg-visual-placeholder"><div class="pg-visual-icon">&#8859;</div><p class="pg-visual-label">Bangkok &#183; Thailand</p><p class="pg-visual-sublabel">Open to Remote &amp; Local</p></div></div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+
+      <div class="footer-col"><h5>Pages</h5><ul>
+        <li><a href="#" data-page="home">Home</a></li>
+        <li><a href="#" data-page="talks">Talks</a></li>
+        <li><a href="#" data-page="experience">Experience</a></li>
+        <li><a href="#" data-page="publish">Projects</a></li>
+        <li><a href="#" data-page="contact">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Credentials</h5><ul>
+        <li><a href="https://fossasia.org" target="_blank">FOSSASIA</a></li>
+        <li><a href="https://credly.com/users/nicha-runglerdkriangkrai/badges" target="_blank">Credly</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Connect</h5><ul>
+        <li><a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#e58b8c868d8497908bd6d2a58288848c89cb868a88">Email</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nicha Runglerdkriangkrai</span>
+      <div class="footer-socials">
+        <a href="https://github.com/nichaaaaaaar37" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/nicha-runglerdkriangkrai" target="_blank">LinkedIn</a>
+        <a href="/cdn-cgi/l/email-protection#46282f252e27343328757106212b272f2a6825292b">Email</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  function go(name){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+    document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});
+    var page=document.getElementById('page-'+name);
+    var nav=document.getElementById('nav-'+name);
+    if(page) page.classList.add('active');
+    if(nav) nav.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.addEventListener('click',function(e){
+    var el=e.target.closest('[data-page]');
+    if(el){e.preventDefault();go(el.getAttribute('data-page'));}
+  });
+  var cur=document.getElementById('cur');
+  var curR=document.getElementById('cur-r');
+  if(cur && curR){
+    document.addEventListener('mousemove',function(e){
+      cur.style.left=e.clientX+'px';
+      cur.style.top=e.clientY+'px';
+      curR.style.left=e.clientX+'px';
+      curR.style.top=e.clientY+'px';
+    });
+    var hovers=document.querySelectorAll('a,button,[data-page],.what-card,.hl-card,.stack-tag,.talks-card,.pg-card,.gcp-item,.exp-tl-entry');
+    hovers.forEach(function(el){
+      el.addEventListener('mouseenter',function(){document.body.classList.add('hov');});
+      el.addEventListener('mouseleave',function(){document.body.classList.remove('hov');});
+    });
+  }
+  go('home');
+})();
+</script>
+</body>
+</html>
